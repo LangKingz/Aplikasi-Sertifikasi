@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:praktek/pages/crud/create.dart';
 import 'package:praktek/pages/crud/lihat_data.dart';
 import 'package:praktek/pages/information.dart';
+import 'package:praktek/pages/login.dart';
 
 class HomeScreen extends StatelessWidget {
   final user;
@@ -128,6 +129,46 @@ class HomeScreen extends StatelessWidget {
                                 SizedBox(width: 20),
                                 Text(
                                   "Tentang Kami ",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Icon(Icons.arrow_forward_ios)
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPages())),
+                      child: Container(
+                        height: 70,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Color(0xffd7d7d7),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        width: double.infinity,
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.info_outline,
+                                  size: 30,
+                                ),
+                                SizedBox(width: 20),
+                                Text(
+                                  "Log Out ",
                                   style: TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,
