@@ -5,7 +5,11 @@ import 'package:praktek/pages/crud/lihat_data.dart';
 import 'package:praktek/pages/information.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final user;
+  const HomeScreen({
+    super.key,
+    required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -160,8 +164,8 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Text(
-            "Welcome , User",
+          Text(
+            "Welcome , $user",
             style: TextStyle(
               color: Colors.white,
               fontSize: 23,

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:praktek/pages/home.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPages extends StatefulWidget {
   const LoginPages({super.key});
@@ -18,9 +21,32 @@ class _LoginPagesState extends State<LoginPages> {
 
   @override
   Widget build(BuildContext context) {
-    handleLogin() async {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+    Future<void> handleLogin() async {
+      final String url = "https://api-sertifikasi.vercel.app/api/api/login";
+      try {
+        final response = await http.post(Uri.parse(url),
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode({
+              'email': emailController.text,
+              'password': passwordController.text
+            }));
+
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomeScreen(
+                        user: emailController.text,
+                      )));
+        } else {
+          final data = jsonDecode(response.body);
+          print(data);
+        }
+      } catch (e) {
+        print(e);
+      }
     }
 
     return Scaffold(
