@@ -22,6 +22,13 @@ class _LoginPagesState extends State<LoginPages> {
   @override
   Widget build(BuildContext context) {
     Future<void> handleLogin() async {
+      if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Email dan Password harus diisi"),
+        ));
+        return;
+      }
+
       final String url = "https://api-sertifikasi.vercel.app/api/api/login";
       try {
         final response = await http.post(Uri.parse(url),
@@ -51,10 +58,12 @@ class _LoginPagesState extends State<LoginPages> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
+          clipBehavior: Clip.hardEdge,
           children: [
             _header(),
             Form(
+              key: formKey,
               child: Column(
                 children: [
                   Container(
